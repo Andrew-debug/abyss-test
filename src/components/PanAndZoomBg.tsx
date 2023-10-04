@@ -61,7 +61,6 @@ const PanAndZoomBg = ({
       const sign = Math.sign(e.deltaY) / 10;
       const scale = 1 - sign;
       //   setScale((prev) => prev - sign);
-      console.log(scale);
       const rect = containerRef.current?.getBoundingClientRect();
 
       if (rect && image) {
