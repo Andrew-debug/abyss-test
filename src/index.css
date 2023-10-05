@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #1d1d1f;
+  background-color: #d6d6d6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,25 +20,6 @@
   box-sizing: border-box;
 }
 
-/* .App > * {
-  position: absolute;
-  will-change: transform;
-} */
-
-.App {
-  width: 100vw;
-  height: 100vh;
-}
-
-.lmao {
-  background: rgb(0, 224, 34);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 224, 34, 1) 0%,
-    rgba(82, 0, 223, 1) 72%,
-    rgba(125, 1, 62, 1) 99%
-  );
-}
 .client-view {
   width: 1000px;
   height: 500px;
@@ -47,4 +28,197 @@
 
 .block {
   background-color: black;
+}
+
+.category-node {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+
+.category-node span {
+  position: relative;
+  display: inline-block;
+}
+.input-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-width: 100px;
+  padding: 10px;
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.node-input--gray-placeholder {
+  all: unset;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+.node-input--gray-placeholder::placeholder {
+  color: gray;
+}
+.node-input--white-placeholder {
+  all: unset;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+.node-input--white-placeholder::placeholder {
+  color: #fff;
+}
+.category-node .input-wrap::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  height: 16px;
+  width: 1px;
+  background-color: red;
+}
+.category-node .input-wrap::after {
+  content: "";
+  position: absolute;
+  top: 44px;
+  left: 50%;
+  height: 16px;
+  width: 1px;
+  background-color: red;
+}
+
+.category-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.category-wrap > .category-node {
+  margin: 15px;
+}
+
+.graph-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.graph-button {
+  all: unset;
+  margin-left: 3px;
+  width: 24px;
+  height: 24px;
+}
+
+.nav-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-logo h1 {
+  font-size: xx-large;
+  color: #242424;
+  font-weight: 600;
+}
+.nav-logo div {
+  color: #fff;
+  background-color: orange;
+  border-radius: 50px;
+  padding: 2px 8px;
+  font-size: small;
+  margin: 8px 0 0 5px;
+  padding-bottom: 3px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d6d6d6;
+  z-index: 9999;
+  padding: 0 40px;
+  border-bottom: 1px solid #c2c2c3;
+}
+
+.navbar nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 2px;
+  margin: 0 5px;
+  padding: 5px 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: small;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  top: 50px;
+  left: -30px;
+  width: 70px;
+  background-color: #fff;
+  z-index: 9999;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+}
+.dropdown-item:hover {
+  background-color: rgb(228, 225, 225);
+  font-weight: 600;
+  color: #000;
+}
+
+.nav-zoom {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-view {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bg-button {
+  all: unset;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #94929268;
+  cursor: pointer;
+}
+
+.bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  min-width: 200vw;
+  min-height: 200vh;
 }

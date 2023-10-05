@@ -1,20 +1,27 @@
 import { useState, useEffect, useRef } from "react";
-import Block from "./Block";
+import Graph from "./Graph";
+import { selectZoom } from "../redux/features/zoomSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectBgPosition,
+  updateBgPosition,
+} from "../redux/features/bgPositionSlice";
 
 const Bg = () => {
   const bgRef = useRef(null);
-  const [scale, setScale] = useState(1);
   const [isDraggable, setIsDraggable] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
-  const size = { width: 4000, height: 4000 };
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const zoom = useSelector(selectZoom);
+  const { top, left } = useSelector(selectBgPosition);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const handleMove = (e: MouseEvent) => {
-      setPosition({
-        ...position,
+      const newPosition = {
         top: e.clientY - offset.y,
         left: e.clientX - offset.x,
-      });
+      };
+      dispatch(updateBgPosition(newPosition));
     };
     if (isDraggable) {
       document.addEventListener("mousemove", handleMove);
@@ -25,33 +32,29 @@ const Bg = () => {
   }, [isDraggable]);
 
   return (
-    <>
+    <div className="bg-view">
       <div
         ref={bgRef}
+        className="bg"
         style={{
-          position: "absolute",
-          top: position.top,
-          left: position.left,
-          width: size.width * scale,
-          height: size.height * scale,
+          top,
+          left,
+          transform: `translate(-25%,-25%) scale(${zoom / 100})`,
         }}
-        className="lmao"
         onMouseDown={(e) => {
           setIsDraggable(true);
           setOffset({
-            x: e.clientX - position.left,
-            y: e.clientY - position.top,
+            x: e.clientX - left,
+            y: e.clientY - top,
           });
         }}
         onMouseUp={() => setIsDraggable(false)}
       >
-        <Block scale={scale} parentSize={size} />
+        <div className="graph-wrap">
+          <Graph />
+        </div>
       </div>
-      <header>
-        <button onClick={() => setScale(scale + 0.1)}>+</button>
-        <button onClick={() => setScale(scale - 0.1)}>---</button>
-      </header>
-    </>
+    </div>
   );
 };
 
