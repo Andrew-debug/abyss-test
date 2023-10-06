@@ -6,6 +6,7 @@ import {
   selectBgPosition,
   updateBgPosition,
 } from "../redux/features/bgPositionSlice";
+import { Bcg, ClientBg } from "../styles/bgStyles";
 
 const Bg = () => {
   const bgRef = useRef(null);
@@ -32,10 +33,9 @@ const Bg = () => {
   }, [isDraggable]);
 
   return (
-    <div className="bg-view">
-      <div
+    <ClientBg>
+      <Bcg
         ref={bgRef}
-        className="bg"
         style={{
           top,
           left,
@@ -50,11 +50,9 @@ const Bg = () => {
         }}
         onMouseUp={() => setIsDraggable(false)}
       >
-        <div className="graph-wrap">
-          <Graph />
-        </div>
-      </div>
-    </div>
+        <Graph />
+      </Bcg>
+    </ClientBg>
   );
 };
 

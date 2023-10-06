@@ -1,6 +1,7 @@
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import { TGraphNode } from "../types";
 import GraphNode from "./GraphNode";
+import { CategoryWrap, GraphWrap } from "../styles/graphStyles";
 
 const graphStart = {
   value: "Categories",
@@ -12,23 +13,29 @@ const graphStart = {
 const Graph = () => {
   const [graphTree, setGraphTree] = useState<TGraphNode>(graphStart);
   const renderGraphNodes = (graphNode: TGraphNode) => {
+    const nodeChildren = Object.getOwnPropertySymbols(graphNode.children);
     return (
-      <div className="category-wrap">
+      <div>
         <GraphNode
           graphNode={graphNode}
           graphTree={graphTree}
           setGraphTree={setGraphTree}
         />
-        <div style={{ display: "flex" }}>
-          {Object.getOwnPropertySymbols(graphNode.children).map(
-            (childKey, index) => {
+        {nodeChildren.length !== 0 && (
+          <GraphWrap
+            $depth={graphNode.depth}
+            $childrenLength={nodeChildren.length}
+          >
+            {nodeChildren.map((childKey, index) => {
               const element = graphNode.children[childKey];
               return (
-                <Fragment key={index}>{renderGraphNodes(element)}</Fragment>
+                <CategoryWrap key={index}>
+                  {renderGraphNodes(element)}
+                </CategoryWrap>
               );
-            }
-          )}
-        </div>
+            })}
+          </GraphWrap>
+        )}
       </div>
     );
   };

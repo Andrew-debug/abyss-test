@@ -2,17 +2,19 @@ import { useState } from "react";
 import { TGraphNode } from "../types";
 import GraphButton from "./GraphButton";
 import { nodesColors } from "../constants";
+import { CategoryNode, InputWrap } from "../styles/graphStyles";
 
 interface IGraphNode {
   graphNode: TGraphNode;
   graphTree: TGraphNode;
-  setGraphTree: any;
+  setGraphTree: (v: TGraphNode) => void;
 }
 
 function GraphNode({ graphNode, graphTree, setGraphTree }: IGraphNode) {
   const [inputValue, setInputValue] = useState(graphNode.value);
   const [isEditMode, setisEditMode] = useState(graphNode.value ? false : true);
   const [beforeEditValue, setBeforeEditValue] = useState("");
+
   const createChild = () => {
     const newGraphId = Symbol();
     graphNode.children[newGraphId] = {
@@ -29,32 +31,16 @@ function GraphNode({ graphNode, graphTree, setGraphTree }: IGraphNode) {
     setGraphTree({ ...graphTree });
   };
 
-  const getTextColor = (isEditMode: boolean, depth: number) => {
-    if (isEditMode || depth === 0) {
-      return "#000";
-    } else {
-      return "#fff";
-    }
-  };
   return (
-    <div className="category-node">
-      <div
-        style={{
-          backgroundColor: isEditMode ? "#fff" : nodesColors[graphNode.depth],
-          color: isEditMode ? "#000" : "#fff",
-        }}
-        className="input-wrap"
+    <CategoryNode>
+      <InputWrap
+        $isEditMode={isEditMode}
+        $bgColor={nodesColors[graphNode.depth]}
+        $depth={graphNode.depth}
       >
         <input
+          name="category"
           type="text"
-          style={{
-            color: getTextColor(isEditMode, graphNode.depth),
-          }}
-          className={
-            isEditMode
-              ? "node-input--gray-placeholder"
-              : "node-input--white-placeholder"
-          }
           placeholder="Category name"
           disabled={!isEditMode}
           value={inputValue}
@@ -64,7 +50,8 @@ function GraphNode({ graphNode, graphTree, setGraphTree }: IGraphNode) {
           }}
           autoFocus
         />
-      </div>
+      </InputWrap>
+
       {isEditMode ? (
         <GraphButton
           handleClick={() => {
@@ -76,6 +63,7 @@ function GraphNode({ graphNode, graphTree, setGraphTree }: IGraphNode) {
       ) : (
         <GraphButton handleClick={() => createChild()} action="create" />
       )}
+
       {graphNode.id && isEditMode ? (
         <GraphButton
           handleClick={() => setisEditMode(false)}
@@ -90,10 +78,11 @@ function GraphNode({ graphNode, graphTree, setGraphTree }: IGraphNode) {
           action="edit"
         />
       )}
+
       {graphNode.parent && !isEditMode && (
         <GraphButton handleClick={() => deleteItem()} action="delete" />
       )}
-    </div>
+    </CategoryNode>
   );
 }
 
