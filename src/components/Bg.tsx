@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import Graph from "./Graph";
 import { selectZoom } from "../redux/features/zoomSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,7 +6,7 @@ import {
   updateBgPosition,
 } from "../redux/features/bgPositionSlice";
 import { Bcg, ClientBg } from "../styles/bgStyles";
-
+import Graph from "./Graph";
 const Bg = () => {
   const bgRef = useRef(null);
   const [isDraggable, setIsDraggable] = useState(false);

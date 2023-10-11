@@ -1,45 +1,41 @@
 import { useState } from "react";
-import { TGraphNode } from "../types";
-import GraphNode from "./GraphNode";
-import { CategoryWrap, GraphWrap } from "../styles/graphStyles";
+import NewGraphNode from "./GraphNode";
+import { IGraph } from "../types";
+import { v4 as uuidv4 } from "uuid";
+import { GraphList } from "../styles/graphStyles";
 
-const graphStart = {
-  value: "Categories",
-  children: {},
-  id: null,
-  parent: null,
-  depth: 0,
-};
-const Graph = () => {
-  const [graphTree, setGraphTree] = useState<TGraphNode>(graphStart);
-  const renderGraphNodes = (graphNode: TGraphNode) => {
-    const nodeChildren = Object.getOwnPropertySymbols(graphNode.children);
+const NewGraph = () => {
+  const [graph, setGraph] = useState<IGraph[]>([
+    {
+      value: "Category",
+      children: [],
+      parent: null,
+      depth: 0,
+      id: uuidv4(),
+    },
+  ]);
+
+  const renderGraph = (graphTree: IGraph[]) => {
     return (
-      <div>
-        <GraphNode
-          graphNode={graphNode}
-          graphTree={graphTree}
-          setGraphTree={setGraphTree}
-        />
-        {nodeChildren.length !== 0 && (
-          <GraphWrap
-            $depth={graphNode.depth}
-            $childrenLength={nodeChildren.length}
-          >
-            {nodeChildren.map((childKey, index) => {
-              const element = graphNode.children[childKey];
-              return (
-                <CategoryWrap key={index}>
-                  {renderGraphNodes(element)}
-                </CategoryWrap>
-              );
-            })}
-          </GraphWrap>
+      <>
+        {graphTree.length !== 0 && (
+          <GraphList>
+            {graphTree.map((node) => (
+              <NewGraphNode
+                key={node.id}
+                node={node}
+                graph={graph}
+                setGraph={setGraph}
+              >
+                {renderGraph(node.children)}
+              </NewGraphNode>
+            ))}
+          </GraphList>
         )}
-      </div>
+      </>
     );
   };
-  return <>{renderGraphNodes(graphStart)}</>;
+  return <>{renderGraph(graph)}</>;
 };
 
-export default Graph;
+export default NewGraph;

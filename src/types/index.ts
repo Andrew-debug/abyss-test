@@ -1,7 +1,7 @@
-export type TGraphNode = {
+export interface IGraph {
   value: string;
-  children: { [key: symbol]: TGraphNode };
-  id: any;
-  parent: TGraphNode | null;
+  children: IGraph[];
+  parent: IGraph | null;
   depth: number;
-};
+  id: string;
+}
