@@ -1,8 +1,8 @@
 import { ReactNode, useState } from "react";
 import { IGraph } from "../types";
-import NewGraphNodeBtnGroup from "./GraphNodeBtnGroup";
+import GraphNodeBtnGroup from "./GraphNodeBtnGroup";
 import { v4 as uuidv4 } from "uuid";
-import { CategoryInner, NewCategoryWrap } from "../styles/graphStyles";
+import { CategoryInner, CategoryWrap } from "../styles/graphStyles";
 import { nodesColors } from "../constants";
 
 interface IGraphNode {
@@ -11,7 +11,7 @@ interface IGraphNode {
   graph: IGraph[];
   setGraph: (v: IGraph[]) => void;
 }
-const NewGraphNode = ({ node, children, graph, setGraph }: IGraphNode) => {
+const GraphNode = ({ node, children, graph, setGraph }: IGraphNode) => {
   const [inputValue, setInputValue] = useState(node.value);
   const [isEditMode, setisEditMode] = useState(node.value ? false : true);
   const [beforeEditValue, setBeforeEditValue] = useState("");
@@ -37,7 +37,7 @@ const NewGraphNode = ({ node, children, graph, setGraph }: IGraphNode) => {
 
   return (
     <li>
-      <NewCategoryWrap>
+      <CategoryWrap>
         <CategoryInner
           $depth={node.depth}
           $isEditMode={isEditMode}
@@ -55,7 +55,7 @@ const NewGraphNode = ({ node, children, graph, setGraph }: IGraphNode) => {
             }}
             autoFocus
           />
-          <NewGraphNodeBtnGroup
+          <GraphNodeBtnGroup
             isEditMode={isEditMode}
             setisEditMode={setisEditMode}
             setInputValue={setInputValue}
@@ -67,10 +67,10 @@ const NewGraphNode = ({ node, children, graph, setGraph }: IGraphNode) => {
             deleteItem={deleteItem}
           />
         </CategoryInner>
-      </NewCategoryWrap>
+      </CategoryWrap>
       {children}
     </li>
   );
 };
 
-export default NewGraphNode;
+export default GraphNode;

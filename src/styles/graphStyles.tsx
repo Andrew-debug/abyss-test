@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewCategoryWrap = styled.div`
+export const CategoryWrap = styled.div`
   width: 100%;
   position: relative;
   padding: 20px 50px 0 50px;
@@ -32,7 +32,7 @@ export const GraphList = styled.ul`
     align-items: center;
   }
 
-  li > ${NewCategoryWrap}::before {
+  li > ${CategoryWrap}::before {
     content: "";
     position: absolute;
     top: 0;
@@ -41,7 +41,7 @@ export const GraphList = styled.ul`
     width: 50%;
     height: 19px;
   }
-  li > ${NewCategoryWrap}::after {
+  li > ${CategoryWrap}::after {
     content: "";
     position: absolute;
     top: 0;
@@ -50,33 +50,33 @@ export const GraphList = styled.ul`
     width: 50%;
     height: 19px;
   }
-  li > ${NewCategoryWrap}::after {
+  li > ${CategoryWrap}::after {
     right: auto;
     left: 50%;
     border-left: 1px solid gray;
   }
-  li:only-child > ${NewCategoryWrap}::after {
+  li:only-child > ${CategoryWrap}::after {
     display: none;
   }
-  li:only-child > ${NewCategoryWrap}::before {
+  li:only-child > ${CategoryWrap}::before {
     display: none;
   }
 
-  li:only-child > ${NewCategoryWrap} {
+  li:only-child > ${CategoryWrap} {
     padding-top: 0;
   }
 
-  li:first-child > ${NewCategoryWrap}::before {
+  li:first-child > ${CategoryWrap}::before {
     border: none;
   }
-  li:last-child > ${NewCategoryWrap}::after {
+  li:last-child > ${CategoryWrap}::after {
     border: none;
   }
-  li:last-child > ${NewCategoryWrap}::before {
+  li:last-child > ${CategoryWrap}::before {
     border-right: 1px solid gray;
     border-radius: 0 5px 0 0;
   }
-  li:first-child > ${NewCategoryWrap}::after {
+  li:first-child > ${CategoryWrap}::after {
     border-radius: 5px 0 0 0;
   }
 `;

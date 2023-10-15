@@ -1,10 +1,10 @@
 import { useState } from "react";
-import NewGraphNode from "./GraphNode";
+import GraphNode from "./GraphNode";
 import { IGraph } from "../types";
 import { v4 as uuidv4 } from "uuid";
 import { GraphList } from "../styles/graphStyles";
 
-const NewGraph = () => {
+const Graph = () => {
   const [graph, setGraph] = useState<IGraph[]>([
     {
       value: "Category",
@@ -21,14 +21,14 @@ const NewGraph = () => {
         {graphTree.length !== 0 && (
           <GraphList>
             {graphTree.map((node) => (
-              <NewGraphNode
+              <GraphNode
                 key={node.id}
                 node={node}
                 graph={graph}
                 setGraph={setGraph}
               >
                 {renderGraph(node.children)}
-              </NewGraphNode>
+              </GraphNode>
             ))}
           </GraphList>
         )}
@@ -38,4 +38,4 @@ const NewGraph = () => {
   return <>{renderGraph(graph)}</>;
 };
 
-export default NewGraph;
+export default Graph;

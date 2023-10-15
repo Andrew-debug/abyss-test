@@ -14,7 +14,7 @@ interface IGraphNodeBtnGroup {
   deleteItem: () => void;
 }
 
-const NewGraphNodeBtnGroup = ({
+const GraphNodeBtnGroup = ({
   isEditMode,
   setisEditMode,
   setInputValue,
@@ -61,4 +61,4 @@ const NewGraphNodeBtnGroup = ({
   );
 };
 
-export default NewGraphNodeBtnGroup;
+export default GraphNodeBtnGroup;
